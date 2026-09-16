@@ -15,7 +15,8 @@ Each document asks:
 
 2. **Make Lean easier for statisticians to understand mathematically.** The goal is to make statisticians capable of reviewing Lean output by understanding its exact language and grammar.
 
-3. **Understand the gaps and propose next steps.** We can look for small, direct pull requests that we could contribute to Mathlib, either by cleaning up the code or by proposing a more general solution. The book we currently want to compare with Mathlib is [*Foundations of Modern Probability*](https://link.springer.com/book/10.1007/978-3-030-61871-1).
+3. **Understand the gaps, improve Mathlib, propose next steps to build for statistcian.** While checking the mathlib, Small, direct pull requests that we could contribute to Mathlib, either by cleaning up the code or by proposing a more general solution. For example, We made a [PR](https://github.com/leanprover-community/mathlib4/pull/43805) after writing the EXAMPLE.md.
+We'd also like to assess the gap between what's currently in Mathlib and the API our research requires. At the moment, we're using  [*Foundations of Modern Probability*](https://link.springer.com/book/10.1007/978-3-030-61871-1) as our reference for the probabilistic and statistical background, so it serves as the reference for comparison with Mathlib.
 
 ## Using AI
 
