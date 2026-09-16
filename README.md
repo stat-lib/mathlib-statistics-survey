@@ -29,4 +29,4 @@ One PR is expected to be a survey over one single LEAN file.
 
 An example can be found here in [EXAMPLE.md](EXAMPLE.md) against the file  [Invariance.lean](https://github.com/leanprover-community/mathlib4/blob/7d32461ad224e921eb05ead7ac02156702f4aa59/Mathlib/Probability/Kernel/Invariance.lean)
 
-A template can be found in [TEMPLATE.md](TEMPLATE.md).
+A template can be found in [TEMPLATE.md](TEMPLATE.md). - This is very initial, and we could make a better agreed template.
