@@ -22,7 +22,7 @@ We'd also like to assess the gap between what's currently in Mathlib and the API
 
 We understand people have different opinions of AI. Feel free to use AI effectively, but remember that the goal of contributing to this project is to make things readable and clear for human to engage with the materials.
 
-You are encouraged to use Lean skills such as [lean4-skills](https://github.com/cameronfreer/lean4-skills) and [Lean skills](https://github.com/leanprover/skills). ChatGPT is also good at explaining and searching.
+For some resources, you can use Lean skills such as [lean4-skills](https://github.com/cameronfreer/lean4-skills) and [Lean skills](https://github.com/leanprover/skills). ChatGPT is also good at explaining and searching.
 
 ## Make a PR
 
