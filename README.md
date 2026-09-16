@@ -23,7 +23,10 @@ Please use AI effectively, but remember that the goal of contributing to this pr
 
 You are encouraged to use Lean skills such as [lean4-skills](https://github.com/cameronfreer/lean4-skills) and [Lean skills](https://github.com/leanprover/skills). ChatGPT is also good at explaining and searching.
 
-## Writing a survey
+## Make a PR
+
+One PR is expected to be a survey over one single LEAN file. 
 
 An example can be found here in [EXAMPLE.md](EXAMPLE.md) against the file  [Invariance.lean](https://github.com/leanprover-community/mathlib4/blob/7d32461ad224e921eb05ead7ac02156702f4aa59/Mathlib/Probability/Kernel/Invariance.lean)
+
 A template can be found in [TEMPLATE.md](TEMPLATE.md).
