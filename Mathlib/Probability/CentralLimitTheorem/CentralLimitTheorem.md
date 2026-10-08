@@ -99,6 +99,17 @@ The file first proves the theorem under the more concrete moment hypotheses `P[X
 
 `HasLaw Y μ P'` records that `Y` has distribution `μ` under `P'`. `TendstoInDistribution` expresses convergence of the pushforward probability measures. The unit theorem uses the characteristic-function characterization of this convergence; the general theorem reuses it after affine transformations.
 
+In Mathlib, [`HasLaw`](https://leanprover-community.github.io/mathlib4_docs/Mathlib/Probability/HasLaw.html) is defined as :-
+
+```lean
+structure HasLaw (X : Ω → 𝓧) (μ : Measure 𝓧)
+    (P : Measure Ω := by volume_tac) : Prop where
+  aemeasurable : AEMeasurable X P
+  map_eq : Measure.map X P = μ
+```
+
+The measurability field matters because `Measure.map` is defined for functions that are measurable almost everywhere. The default `by volume_tac` asks Lean to synthesize the canonical volume measure when a caller omits `P`. The CLT proof does not use the default.
+
 ### Gaussian law
 
 `gaussianReal 0 v` is the real Gaussian law with mean zero and variance `v`. The target in the main theorem uses the variance of `X 0`; `gaussianReal` takes a nonnegative variance parameter, hence the conversion to `ℝ≥0`.
@@ -114,20 +125,39 @@ The file first proves the theorem under the more concrete moment hypotheses `P[X
 
 The variance-positive standardization result is declared `private`, so it is an internal proof helper rather than part of the public API.
 
+The main analytic limit is stated by `tendsto_charFun_inv_sqrt_mul_pow`. Its hypotheses are that `X` is almost-everywhere measurable, has mean zero, and has second moment one; for each real `t`, it concludes
+
+```lean
+Tendsto
+  (fun n ↦ (charFun (P.map X) ((√n)⁻¹ * t)) ^ n)
+  atTop (𝓝 (exp (-t ^ 2 / 2)))
+```
+
+This is the characteristic-function limit that identifies the standard Gaussian. The unit-variance distribution theorem then adds the i.i.d. hypotheses and uses the characteristic-function criterion for convergence in distribution; the main theorem removes the centering and unit-variance restrictions.
+
+The declaration `tendstoInDistribution_inv_sqrt_mul_sum_sub` also has the attribute `@[wikidata Q190391]`. This is metadata connecting the theorem to the Wikidata item for the central limit theorem; it does not change the proposition or its proof. Its proof begins by splitting on whether the variance is zero:
+
+```lean
+obtain h | h := eq_or_ne Var[X 0; P] 0
+```
+
+The two following bullets (`·`) are the two goals created by that split. In the zero case, each `X n` equals the common mean almost everywhere, so the centered sum has the point-mass law. In the positive case, the private helper standardizes by `√Var[X 0; P]`, applies the unit-variance theorem, and rescales the limit.
+
 ## 4. Boundary conditions and scope
 
 - **Dimension:** This file proves the real-valued, one-dimensional central limit theorem. 
 It does not state a multivariate version.
 - **Moment assumption:** The theorem assumes a finite second moment, not higher moments.
+- **Scope of this file:** The module formalizes the i.i.d. finite-variance theorem in 1-Dimension. 
 
 ## 5. Discussion
 
 The proof follows the classical characteristic-function route. Its API separates the analytic part of the argument (Taylor expansion and the nth-power limit) from the probability part (independence, identical laws, and the characteristic-function criterion). 
 It then reuses the normalized theorem to handle arbitrary mean and variance.
 
-Potential task is to prove CLT via other methods.
+This survey targets the immutable Mathlib revision recorded in the metadata (`f7b0818b53d52ed1c795f727fe5c4c734dc41047`), rather than whatever happens to be on `master` later. The book comparison below is at the theorem level: this module covers the real-valued i.i.d. finite-variance CLT and its characteristic-function proof. It is one result within the broader limit-theorem material in Kallenberg's Chapter 7, “Gaussian and Poisson Convergence”; this survey does not claim to compare every result in that chapter.
 
 ## 6. References
 
 - Mathlib source at the recorded revision: [CentralLimitTheorem.lean](https://github.com/leanprover-community/mathlib4/blob/f7b0818b53d52ed1c795f727fe5c4c734dc41047/Mathlib/Probability/CentralLimitTheorem.lean).
-- [Other method to prove CLT](https://terrytao.wordpress.com/2010/01/05/254a-notes-2-the-central-limit-theorem/)
+- Kallenberg, O. *Foundations of Modern Probability*, 3rd ed., Chapter 7, “Gaussian and Poisson Convergence,” Springer, 2021. [Book page](https://link.springer.com/book/10.1007/978-3-030-61871-1).
